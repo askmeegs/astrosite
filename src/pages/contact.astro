@@ -1,0 +1,223 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact Me | Wholesome Dev" description="Get in touch with me for collaborations, job opportunities, or just to say hi!">
+  <main>
+    <section class="mb-8">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg mb-4 max-w-2xl mx-auto">
+        <h1 class="text-3xl font-comic font-bold mb-6 pop-in text-center">Let's <span class="wiggle-hover inline-block">Connect</span>! <span class="heartbeat inline-block">💌</span></h1>
+        
+        <div class="bg-pink-50 dark:bg-indigo-900 p-4 rounded-lg mb-6">
+          <p class="font-comic text-center">
+            I'm always open to new opportunities, collaborations, or just a friendly chat! 
+            <span class="bounce-hover inline-block">✨</span>
+          </p>
+        </div>
+
+        <form id="contact-form" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <label for="name" class="block font-comic font-bold">
+                Your Name <span class="text-pink-500">*</span>
+              </label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                class="w-full p-3 border border-pink-200 dark:border-indigo-700 rounded-lg font-comic focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-indigo-500 dark:bg-gray-700"
+                required
+              />
+              <p class="text-red-500 text-xs font-comic hidden" id="name-error">Please enter your name</p>
+            </div>
+            
+            <div class="space-y-2">
+              <label for="email" class="block font-comic font-bold">
+                Email Address <span class="text-pink-500">*</span>
+              </label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="w-full p-3 border border-pink-200 dark:border-indigo-700 rounded-lg font-comic focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-indigo-500 dark:bg-gray-700"
+                required
+              />
+              <p class="text-red-500 text-xs font-comic hidden" id="email-error">Please enter a valid email</p>
+            </div>
+          </div>
+          
+          <div class="space-y-2">
+            <label for="subject" class="block font-comic font-bold">
+              Subject <span class="text-pink-500">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="subject" 
+              name="subject" 
+              class="w-full p-3 border border-pink-200 dark:border-indigo-700 rounded-lg font-comic focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-indigo-500 dark:bg-gray-700"
+              required
+            />
+            <p class="text-red-500 text-xs font-comic hidden" id="subject-error">Please enter a subject</p>
+          </div>
+          
+          <div class="space-y-2">
+            <label for="message" class="block font-comic font-bold">
+              Your Message <span class="text-pink-500">*</span>
+            </label>
+            <textarea 
+              id="message" 
+              name="message" 
+              rows="5" 
+              class="w-full p-3 border border-pink-200 dark:border-indigo-700 rounded-lg font-comic focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-indigo-500 dark:bg-gray-700"
+              required
+            ></textarea>
+            <p class="text-red-500 text-xs font-comic hidden" id="message-error">Please enter a message</p>
+          </div>
+          
+          <div class="flex items-center">
+            <input 
+              type="checkbox" 
+              id="consent" 
+              name="consent" 
+              class="mr-2 h-5 w-5 text-pink-500 focus:ring-pink-400 dark:focus:ring-indigo-600 rounded"
+              required
+            />
+            <label for="consent" class="text-sm font-comic">
+              I agree to receive responses via email <span class="text-pink-500">*</span>
+            </label>
+          </div>
+          <p class="text-red-500 text-xs font-comic hidden" id="consent-error">Please check this box if you want to proceed</p>
+          
+          <div class="text-center pt-4">
+            <button 
+              type="submit" 
+              class="bg-gradient-to-r from-pink-400 to-purple-500 hover:from-pink-500 hover:to-purple-600 text-white font-comic font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 jelly-hover"
+            >
+              Send Message <span class="bounce-hover inline-block">📨</span>
+            </button>
+          </div>
+        </form>
+        
+        <div id="success-message" class="hidden mt-4 p-4 bg-green-100 dark:bg-green-900 rounded-lg text-center">
+          <p class="font-comic text-green-700 dark:text-green-300 flex items-center justify-center">
+            <span class="text-2xl mr-2 bounce-hover inline-block">✅</span>
+            Message sent successfully! I'll get back to you soon.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Alternative Contact Methods -->
+      <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+        <h2 class="text-xl font-comic font-bold mb-4 text-center">Other Ways to Reach Me <span class="wiggle-hover inline-block">🌎</span></h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <a href="mailto:hello@wholesomedev.com" class="flex flex-col items-center p-3 rounded-lg hover:bg-pink-50 dark:hover:bg-indigo-900 transition-colors">
+            <span class="text-3xl mb-2 bounce-hover inline-block">📧</span>
+            <span class="font-comic text-sm text-center">hello@wholesomedev.com</span>
+          </a>
+          
+          <a href="https://twitter.com/wholesomedev" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center p-3 rounded-lg hover:bg-pink-50 dark:hover:bg-indigo-900 transition-colors">
+            <span class="text-3xl mb-2 bounce-hover inline-block">🐦</span>
+            <span class="font-comic text-sm text-center">@wholesomedev</span>
+          </a>
+          
+          <a href="https://github.com/wholesomedev" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center p-3 rounded-lg hover:bg-pink-50 dark:hover:bg-indigo-900 transition-colors">
+            <span class="text-3xl mb-2 bounce-hover inline-block">👩‍💻</span>
+            <span class="font-comic text-sm text-center">@wholesomedev</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const successMessage = document.getElementById('success-message');
+    
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Reset errors
+        document.querySelectorAll('.text-red-500').forEach(el => {
+          el.classList.add('hidden');
+        });
+        
+        // Get form values
+        const name = (document.getElementById('name') as HTMLInputElement).value.trim();
+        const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+        const subject = (document.getElementById('subject') as HTMLInputElement).value.trim();
+        const message = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
+        const consent = (document.getElementById('consent') as HTMLInputElement).checked;
+        
+        // Validate
+        let isValid = true;
+        
+        if (!name) {
+          document.getElementById('name-error')?.classList.remove('hidden');
+          isValid = false;
+        }
+        
+        if (!email || !/\S+@\S+\.\S+/.test(email)) {
+          document.getElementById('email-error')?.classList.remove('hidden');
+          isValid = false;
+        }
+        
+        if (!subject) {
+          document.getElementById('subject-error')?.classList.remove('hidden');
+          isValid = false;
+        }
+        
+        if (!message) {
+          document.getElementById('message-error')?.classList.remove('hidden');
+          isValid = false;
+        }
+        
+        if (!consent) {
+          document.getElementById('consent-error')?.classList.remove('hidden');
+          isValid = false;
+        }
+        
+        // If valid, submit form (simulating submission for demo)
+        if (isValid) {
+          // Add loading state
+          const submitBtn = form.querySelector('button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.innerHTML = 'Sending... <span class="inline-block animate-spin">🔄</span>';
+            submitBtn.setAttribute('disabled', 'true');
+          }
+          
+          // Simulate API call
+          setTimeout(() => {
+            form.reset();
+            // Show success message
+            if (successMessage) {
+              successMessage.classList.remove('hidden');
+              // Hide after 5 seconds
+              setTimeout(() => {
+                successMessage.classList.add('hidden');
+              }, 5000);
+            }
+            
+            // Restore button
+            if (submitBtn) {
+              submitBtn.innerHTML = 'Send Message <span class="bounce-hover inline-block">📨</span>';
+              submitBtn.removeAttribute('disabled');
+            }
+            
+            // Show toast notification if available
+            if (window.showMemeToast) {
+              window.showMemeToast('Message sent successfully! 🎉', {
+                type: 'success',
+                duration: 3000,
+                sound: true
+              });
+            }
+          }, 1500);
+        }
+      });
+    }
+  });
+</script> 

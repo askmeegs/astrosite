@@ -1,0 +1,281 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Documentation | Wholesome Dev Template" description="Documentation and guide for using the Wholesome Dev Template">
+  <main>
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+        <h1 class="text-3xl font-comic font-bold mb-6 text-center pop-in">
+          Template Documentation <span class="wiggle-hover inline-block">📚</span>
+        </h1>
+
+        <div class="space-y-8">
+          <!-- Introduction -->
+          <section id="introduction">
+            <h2 class="text-2xl font-comic font-bold mb-3 text-pink-600 dark:text-pink-400">
+              Introduction <span class="bounce-hover inline-block">👋</span>
+            </h2>
+            <p class="mb-4 font-comic dark:text-white">
+              Welcome to the Wholesome Dev Template! This fun, interactive portfolio template is built with Astro and features a playful design with lots of animations and personality. This
+              documentation will help you customize and deploy your own version.
+            </p>
+          </section>
+
+          <!-- Features -->
+          <section id="features">
+            <h2 class="text-2xl font-comic font-bold mb-3 text-pink-600 dark:text-pink-400">
+              Features <span class="bounce-hover inline-block">✨</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div class="bg-pink-50 dark:bg-gray-700 p-3 rounded-lg">
+                <h3 class="font-comic font-bold flex items-center">
+                  <span class="text-xl mr-2 tada-hover inline-block">🌓</span>
+                  Dark/Light Mode
+                </h3>
+                <p class="text-sm font-comic mt-1 dark:text-gray-300">Toggle between light and dark themes with automatic OS preference detection</p>
+              </div>
+
+              <div class="bg-blue-50 dark:bg-gray-700 p-3 rounded-lg">
+                <h3 class="font-comic font-bold flex items-center">
+                  <span class="text-xl mr-2 tada-hover inline-block">🎨</span>
+                  Theme Customization
+                </h3>
+                <p class="text-sm font-comic mt-1 dark:text-gray-300">Change color schemes, font sizes, and animation speeds</p>
+              </div>
+
+              <div class="bg-purple-50 dark:bg-gray-700 p-3 rounded-lg">
+                <h3 class="font-comic font-bold flex items-center">
+                  <span class="text-xl mr-2 tada-hover inline-block">🌐</span>
+                  SEO Optimization
+                </h3>
+                <p class="text-sm font-comic mt-1 dark:text-gray-300">Optimize your site for search engines with built-in SEO settings</p>
+              </div>
+
+              <div class="bg-green-50 dark:bg-gray-700 p-3 rounded-lg">
+                <h3 class="font-comic font-bold flex items-center">
+                  <span class="text-xl mr-2 tada-hover inline-block">📱</span>
+                  Fully Responsive
+                </h3>
+                <p class="text-sm font-comic mt-1 dark:text-gray-300">Looks great on all devices from mobile to desktop</p>
+              </div>
+
+              <div class="bg-yellow-50 dark:bg-gray-700 p-3 rounded-lg">
+                <h3 class="font-comic font-bold flex items-center">
+                  <span class="text-xl mr-2 tada-hover inline-block">📝</span>
+                  Blog Support
+                </h3>
+                <p class="text-sm font-comic mt-1 dark:text-gray-300">Integrated blog functionality with Markdown support</p>
+              </div>
+
+              <div class="bg-indigo-50 dark:bg-gray-700 p-3 rounded-lg">
+                <h3 class="font-comic font-bold flex items-center">
+                  <span class="text-xl mr-2 tada-hover inline-block">🎭</span>
+                  Fun Animations
+                </h3>
+                <p class="text-sm font-comic mt-1 dark:text-gray-300">Playful animations that can be customized or disabled</p>
+              </div>
+
+              <div class="bg-red-50 dark:bg-gray-700 p-3 rounded-lg">
+                <h3 class="font-comic font-bold flex items-center">
+                  <span class="text-xl mr-2 tada-hover inline-block">📣</span>
+                  Toast Notifications
+                </h3>
+                <p class="text-sm font-comic mt-1 dark:text-gray-300">Customizable toast notification system</p>
+              </div>
+
+              <div class="bg-teal-50 dark:bg-gray-700 p-3 rounded-lg">
+                <h3 class="font-comic font-bold flex items-center">
+                  <span class="text-xl mr-2 tada-hover inline-block">♿</span>
+                  Accessibility
+                </h3>
+                <p class="text-sm font-comic mt-1 dark:text-gray-300">Accessible design with reduced motion options</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Getting Started -->
+          <section id="getting-started">
+            <h2 class="text-2xl font-comic font-bold mb-3 text-pink-600 dark:text-pink-400">
+              Getting Started <span class="bounce-hover inline-block">🚀</span>
+            </h2>
+
+            <div class="mb-4">
+              <h3 class="text-xl font-comic font-bold mb-2 dark:text-white">1. Prerequisites</h3>
+              <div class="bg-gray-100 dark:bg-gray-900 p-3 rounded-lg font-mono text-sm mb-3 overflow-x-auto">
+                <p class="dark:text-white">- Node.js (v20+)</p>
+                <p class="dark:text-white">- npm or yarn</p>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h3 class="text-xl font-comic font-bold mb-2 dark:text-white">2. Installation</h3>
+              <div class="bg-gray-100 dark:bg-gray-900 p-3 rounded-lg font-mono text-sm mb-3 overflow-x-auto">
+                <p class="dark:text-white"># Navigate to project directory</p>
+                <p class="dark:text-white">cd wholesome-dev-template</p>
+                <p class="dark:text-white"># Install dependencies</p>
+                <p class="dark:text-white">npm install</p>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h3 class="text-xl font-comic font-bold mb-2 dark:text-white">3. Development</h3>
+              <div class="bg-gray-100 dark:bg-gray-900 p-3 rounded-lg font-mono text-sm mb-3 overflow-x-auto">
+                <p class="dark:text-white"># Start development server</p>
+                <p class="dark:text-white">npm run dev</p>
+              </div>
+              <p class="text-sm font-comic dark:text-gray-300">
+                This will start a local development server at <code class="bg-gray-200 dark:bg-gray-700 px-1 py-0.5 rounded">http://localhost:3000</code>
+              </p>
+            </div>
+
+            <div class="mb-4">
+              <h3 class="text-xl font-comic font-bold mb-2 dark:text-white">4. Building for Production</h3>
+              <div class="bg-gray-100 dark:bg-gray-900 p-3 rounded-lg font-mono text-sm mb-3 overflow-x-auto">
+                <p class="dark:text-white"># Build the project</p>
+                <p class="dark:text-white">npm run build</p>
+              </div>
+              <p class="text-sm font-comic dark:text-gray-300">The built files will be in the <code class="bg-gray-200 dark:bg-gray-700 px-1 py-0.5 rounded">dist/</code> directory.</p>
+            </div>
+          </section>
+
+          <!-- Customization -->
+          <section id="customization">
+            <h2 class="text-2xl font-comic font-bold mb-3 text-pink-600 dark:text-pink-400">
+              Customization <span class="bounce-hover inline-block">🔧</span>
+            </h2>
+
+            <div class="mb-4">
+              <h3 class="text-xl font-comic font-bold mb-2 dark:text-white">Personal Information</h3>
+              <p class="text-sm font-comic mb-2 dark:text-gray-300">
+                Edit the data files in <code class="bg-gray-200 dark:bg-gray-700 px-1 py-0.5 rounded">src/data/</code> to update your:
+              </p>
+              <ul class="list-disc pl-5 text-sm font-comic dark:text-gray-300">
+                <li>Projects</li>
+                <li>Skills</li>
+                <li>Education</li>
+                <li>Work experience</li>
+                <li>Testimonials</li>
+              </ul>
+            </div>
+
+            <div class="mb-4">
+              <h3 class="text-xl font-comic font-bold mb-2 dark:text-white">Adding Blog Posts</h3>
+              <p class="text-sm font-comic mb-2 dark:text-gray-300">
+                Create new markdown files in <code class="bg-gray-200 dark:bg-gray-700 px-1 py-0.5 rounded">src/blogs/</code> with the following frontmatter format:
+              </p>
+              <div class="bg-gray-100 dark:bg-gray-900 p-3 rounded-lg font-mono text-sm mb-3 overflow-x-auto">
+                <p class="dark:text-white">---</p>
+                <p class="dark:text-white">title: "My Awesome Blog Post"</p>
+                <p class="dark:text-white">date: "2023-06-15"</p>
+                <p class="dark:text-white">description: "A short description of the post"</p>
+                <p class="dark:text-white">image: "/blog-images/my-post-image.jpg"</p>
+                <p class="dark:text-white">tags: ["javascript", "web development"]</p>
+                <p class="dark:text-white">---</p>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h3 class="text-xl font-comic font-bold mb-2 dark:text-white">Changing Colors & Theme</h3>
+              <p class="text-sm font-comic mb-2 dark:text-gray-300">This template uses Tailwind CSS for styling. You can customize the default colors in:</p>
+              <div class="bg-gray-100 dark:bg-gray-900 p-3 rounded-lg font-mono text-sm mb-3 overflow-x-auto">
+                <p class="dark:text-white">tailwind.config.cjs</p>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h3 class="text-xl font-comic font-bold mb-2 dark:text-white">Adding Translations</h3>
+              <p class="text-sm font-comic mb-2 dark:text-gray-300">Expand the translations object in:</p>
+              <div class="bg-gray-100 dark:bg-gray-900 p-3 rounded-lg font-mono text-sm mb-3 overflow-x-auto">
+                <p class="dark:text-white">src/components/LanguageSwitcher.astro</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Deployment -->
+          <section id="deployment">
+            <h2 class="text-2xl font-comic font-bold mb-3 text-pink-600 dark:text-pink-400">
+              Deployment <span class="bounce-hover inline-block">🚢</span>
+            </h2>
+
+            <div class="mb-4">
+              <h3 class="text-xl font-comic font-bold mb-2 dark:text-white">Netlify</h3>
+              <div class="bg-gray-100 dark:bg-gray-900 p-3 rounded-lg font-mono text-sm mb-3 overflow-x-auto">
+                <p class="dark:text-white"># netlify.toml</p>
+                <p class="dark:text-white">[build]</p>
+                <p class="dark:text-white">command = "npm run build"</p>
+                <p class="dark:text-white">publish = "dist"</p>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h3 class="text-xl font-comic font-bold mb-2 dark:text-white">Vercel</h3>
+              <p class="text-sm font-comic dark:text-gray-300">For Vercel, simply connect your repository and it will automatically detect the Astro project.</p>
+            </div>
+          </section>
+
+          <!-- Support -->
+          <section id="support">
+            <h2 class="text-2xl font-comic font-bold mb-3 text-pink-600 dark:text-pink-400">
+              Support <span class="bounce-hover inline-block">🆘</span>
+            </h2>
+
+            <p class="text-sm font-comic mb-4 dark:text-white">If you have any questions or need help with customization, please feel free to:</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-1 gap-4">
+              <a href="mailto:azoux0311@gmail.com" class="bg-blue-100 dark:bg-blue-900 p-4 rounded-lg text-center hover:scale-105 transition-transform">
+                <span class="text-2xl mb-2 block bounce-hover">📧</span>
+                <span class="font-comic font-bold dark:text-white">Email Support</span>
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <!-- Table of Contents (Fixed on the side) -->
+        <div class="hidden lg:block fixed top-40 right-8 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg w-48">
+          <h3 class="font-comic font-bold mb-2 dark:text-white">On This Page</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#introduction" class="text-blue-500 hover:text-blue-700 font-comic">Introduction</a></li>
+            <li><a href="#features" class="text-blue-500 hover:text-blue-700 font-comic">Features</a></li>
+            <li><a href="#getting-started" class="text-blue-500 hover:text-blue-700 font-comic">Getting Started</a></li>
+            <li><a href="#customization" class="text-blue-500 hover:text-blue-700 font-comic">Customization</a></li>
+            <li><a href="#deployment" class="text-blue-500 hover:text-blue-700 font-comic">Deployment</a></li>
+            <li><a href="#support" class="text-blue-500 hover:text-blue-700 font-comic">Support</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Highlight active section in the table of contents
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section[id]')
+    const navLinks = document.querySelectorAll('a[href^="#"]')
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3,
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id')
+          navLinks.forEach((link) => {
+            link.classList.remove('text-pink-500', 'font-bold')
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('text-pink-500', 'font-bold')
+            }
+          })
+        }
+      })
+    }, observerOptions)
+
+    sections.forEach((section) => {
+      observer.observe(section)
+    })
+  })
+</script>

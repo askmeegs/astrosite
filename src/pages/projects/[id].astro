@@ -1,0 +1,133 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { projects } from '../../data/projects.js';
+
+export async function getStaticPaths() {
+  return projects.map(project => ({
+    params: { id: project.id },
+    props: { project }
+  }));
+}
+
+const { project } = Astro.props;
+
+// Find next and previous projects for navigation
+const currentIndex = projects.findIndex(p => p.id === project.id);
+const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
+const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
+---
+
+<Layout title={`${project.title} | Project Details`}>
+  <main class="container mx-auto px-4 py-8">
+    <article class="max-w-4xl mx-auto">
+      <!-- Hero Section -->
+      <section class="mb-16">
+        <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg mb-8">
+          <div class="relative">
+            <img 
+              src={project.image} 
+              alt={project.title} 
+              class="w-full h-64 object-cover"
+            />
+            <div class="absolute top-4 left-4 bg-white dark:bg-gray-800 h-16 w-16 rounded-lg flex items-center justify-center text-3xl shadow-md">
+              {project.emoji}
+            </div>
+            <div class="absolute top-4 right-4 bg-white dark:bg-gray-800 px-4 py-2 rounded-lg shadow-md">
+              <p class="font-comic text-gray-700 dark:text-gray-300">{project.year}</p>
+            </div>
+          </div>
+          <div class="p-8">
+            <h1 class="text-4xl font-comic font-bold mb-4 dark:text-white">{project.title}</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 font-comic mb-6">{project.description}</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              {project.tags.map((tag) => (
+                <span class="bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 px-3 py-1 rounded-full font-comic">#{tag}</span>
+              ))}
+            </div>
+            <p class="text-gray-700 dark:text-gray-300 font-comic text-lg">{project.longDescription}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section class="mb-16">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-md">
+          <h2 class="text-3xl font-comic font-bold mb-6 dark:text-white">✨ Such Features</h2>
+          <ul class="space-y-3">
+            {project.features.map(feature => (
+              <li class="flex items-start">
+                <span class="text-pink-500 dark:text-pink-400 mr-2">•</span>
+                <p class="text-gray-700 dark:text-gray-300 font-comic">{feature}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <!-- Technologies -->
+      <section class="mb-16">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-md">
+          <h2 class="text-3xl font-comic font-bold mb-6 dark:text-white">🛠️ Much Tech Stack</h2>
+          <div class="flex flex-wrap gap-3">
+            {project.technologies.map(tech => (
+              <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-4 py-2 rounded-lg font-comic">{tech}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Process -->
+      <section class="mb-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-md">
+          <h2 class="text-3xl font-comic font-bold mb-6 dark:text-white">🤔 Very Challenge</h2>
+          <p class="text-gray-700 dark:text-gray-300 font-comic">{project.challenges}</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-md">
+          <h2 class="text-3xl font-comic font-bold mb-6 dark:text-white">🎉 Wow Results</h2>
+          <p class="text-gray-700 dark:text-gray-300 font-comic">{project.outcome}</p>
+        </div>
+      </section>
+
+      <!-- Navigation -->
+      <section class="mb-16">
+        <div class="flex justify-between">
+          {prevProject ? (
+            <a href={`/projects/${prevProject.id}`} class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md flex items-center hover:scale-105 transition-transform">
+              <span class="text-2xl mr-2">👈</span>
+              <div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-comic">Previous Project</p>
+                <p class="font-comic font-bold dark:text-white">{prevProject.title}</p>
+              </div>
+            </a>
+          ) : (
+            <div></div>
+          )}
+          
+          {nextProject ? (
+            <a href={`/projects/${nextProject.id}`} class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md flex items-center hover:scale-105 transition-transform">
+              <div class="text-right">
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-comic">Next Project</p>
+                <p class="font-comic font-bold dark:text-white">{nextProject.title}</p>
+              </div>
+              <span class="text-2xl ml-2">👉</span>
+            </a>
+          ) : (
+            <div></div>
+          )}
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="text-center">
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/projects" class="bg-gradient-to-r from-pink-400 to-pink-600 text-white px-6 py-3 rounded-full font-comic font-bold inline-block hover:scale-105 transition-transform">
+            ← All Projects
+          </a>
+          <a href="/" class="bg-white dark:bg-gray-700 border-2 border-pink-400 dark:border-pink-500 text-pink-600 dark:text-pink-300 px-6 py-3 rounded-full font-comic font-bold inline-block hover:scale-105 transition-transform">
+            Home Page
+          </a>
+        </div>
+      </section>
+    </article>
+  </main>
+</Layout> 

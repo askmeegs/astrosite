@@ -1,0 +1,91 @@
+---
+// Get current path to highlight the link differently on the template purchase page
+const pathname = new URL(Astro.request.url).pathname;
+const isTemplatePage = pathname.includes('purchase') || pathname.includes('pricing');
+---
+
+<div id="promo-banner" class="bg-gradient-to-r from-indigo-600 to-pink-600 text-white py-2 px-4 shadow-md mb-6 transition-all duration-300">
+  <div class="container mx-auto flex flex-wrap justify-between items-center">
+    <div class="flex items-center">
+      <span class="inline-block mr-2 wiggle-hover text-xl">⭐</span>
+      <p class="text-sm font-comic">
+        Get this gorgeous personal template for your portfolio!
+        <span class="hidden sm:inline">Basic for quick setup, Pro for custom features.</span>
+      </p>
+    </div>
+    <div class="flex items-center">
+      <div class="flex space-x-2 ml-4">
+        <a 
+          href="/pricing" 
+          class={`text-xs px-3 py-1 rounded-full font-comic font-bold transition-all ${isTemplatePage ? 'bg-white text-pink-600' : 'bg-indigo-700 hover:bg-indigo-800 text-white'}`}
+        >
+          See Plans
+        </a>
+      </div>
+      <button id="close-banner" class="ml-3 p-1 hover:bg-indigo-700 rounded-full transition-colors" aria-label="Close promotion banner">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('promo-banner');
+    const closeButton = document.getElementById('close-banner');
+    
+    // Check if banner was previously closed
+    const isBannerClosed = localStorage.getItem('promo-banner-closed') === 'true';
+    
+    // Hide the banner if it was previously closed
+    if (isBannerClosed && banner) {
+      banner.style.display = 'none';
+    }
+    
+    // Handle hover effect
+    if (banner) {
+      banner.addEventListener('mouseenter', () => {
+        banner.classList.add('from-indigo-500', 'to-pink-500');
+        banner.classList.remove('from-indigo-600', 'to-pink-600');
+      });
+      
+      banner.addEventListener('mouseleave', () => {
+        banner.classList.add('from-indigo-600', 'to-pink-600');
+        banner.classList.remove('from-indigo-500', 'to-pink-500');
+      });
+    }
+    
+    // Close banner and remember preference
+    closeButton?.addEventListener('click', () => {
+      if (banner) {
+        // Animate the closing
+        banner.style.transform = 'translateY(-100%)';
+        banner.style.opacity = '0';
+        
+        // After animation, hide the element
+        setTimeout(() => {
+          banner.style.display = 'none';
+          // Store the preference
+          localStorage.setItem('promo-banner-closed', 'true');
+        }, 300);
+      }
+    });
+    
+    // Reset the preference after 7 days
+    const lastClosed = localStorage.getItem('promo-banner-closed-date');
+    if (lastClosed) {
+      const daysSinceClosed = (Date.now() - parseInt(lastClosed)) / (1000 * 60 * 60 * 24);
+      if (daysSinceClosed > 7) {
+        localStorage.removeItem('promo-banner-closed');
+        localStorage.removeItem('promo-banner-closed-date');
+      }
+    }
+    
+    // When closing, also store the date
+    closeButton?.addEventListener('click', () => {
+      localStorage.setItem('promo-banner-closed-date', Date.now().toString());
+    });
+  });
+</script> 

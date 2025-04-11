@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getPageSeo } from '../data/seoUtils';
+
+interface Props {
+  pageType: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
+  type?: string;
+  robotsDirectives?: string;
+  article?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    tags?: string[];
+  };
+}
+
+const { pageType, ...customProps } = Astro.props;
+
+// Get page SEO settings by merging default settings with custom props
+const seoProps = getPageSeo(pageType, customProps);
+---
+
+<Layout {...seoProps}>
+  <slot />
+</Layout> 

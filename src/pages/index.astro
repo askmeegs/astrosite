@@ -1,0 +1,358 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { getFeaturedProjects } from '../data/projects.js'
+import ConfettiButton from '../components/ConfettiButton.astro'
+import MemeLoader from '../components/MemeLoader.astro'
+import NewsletterSignup from '../components/NewsletterSignup.astro'
+import OptimizedImage from '../components/OptimizedImage.astro'
+
+const skills = [
+  { name: 'JavaScript', emoji: '🚀' },
+  { name: 'TypeScript', emoji: '📝' },
+  { name: 'React', emoji: '⚛️' },
+  { name: 'Node.js', emoji: '🟢' },
+  { name: 'CSS', emoji: '🎨' },
+  { name: 'Git', emoji: '🌳' },
+]
+
+const projects = getFeaturedProjects()
+
+const education = [
+  {
+    school: 'University of Memeology',
+    degree: 'Master of Doge Science',
+    years: '2020-2022',
+    emoji: '🎓',
+  },
+  {
+    school: 'Stack Overflow Academy',
+    degree: 'Bachelor of Copy & Paste',
+    years: '2016-2020',
+    emoji: '📋',
+  },
+]
+
+const experience = [
+  {
+    company: 'Dogecoin Industries',
+    position: 'Senior Borkend Developer',
+    years: '2022-Present',
+    description: 'Much code. Very deploy. Wow.',
+    emoji: '💼',
+  },
+  {
+    company: 'Meme Dream Team',
+    position: 'Junior Cat GIF Specialist',
+    years: '2020-2022',
+    description: 'Optimized purr-formance by 300%',
+    emoji: '🐱',
+  },
+]
+
+const testimonials = [
+  {
+    name: 'Karen Coder',
+    position: 'Senior Dev at TechCorp',
+    quote: 'Such amazing developer! Code always works on their machine!',
+    emoji: '⭐',
+  },
+  {
+    name: 'Bob Builderman',
+    position: 'Project Manager',
+    quote: 'Delivered project 5 minutes before deadline. Legend.',
+    emoji: '🏆',
+  },
+  {
+    name: 'Syntax Error',
+    position: 'Cat Developer',
+    quote: 'Meow meow deploy meow bug fix meow meow.',
+    emoji: '😺',
+  },
+]
+
+// Get recent blog posts
+const recentPosts = await Astro.glob('../blogs/*.md')
+const sortedRecentPosts = recentPosts.sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()).slice(0, 3) // Show only 3 most recent posts
+---
+
+<Layout title="Wholesome Dev Portfolio" description="A fun and interactive developer portfolio template with wholesome vibes">
+  <main>
+    <!-- Hero Section -->
+    <section class="text-center mb-8">
+      <div class="bg-white dark:bg-gray-800 dark:text-white rounded-lg p-4 shadow-lg mb-4 transform hover:scale-105 transition-transform">
+        <div class="flex flex-col md:flex-row items-center">
+          <OptimizedImage
+            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
+            alt="Developer Avatar"
+            width={96}
+            height={96}
+            class="w-24 h-24 mx-auto md:mx-0 rounded-full mb-2 md:mb-0 md:mr-4 float tada-hover"
+          />
+          <div>
+            <h1 class="text-3xl font-comic font-bold mb-2 pop-in">Hello frens! <span class="wiggle-hover inline-block">👋</span></h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300 font-comic slide-in-left">
+              I'm a developer who believes in the power of positivity and clean code! <span class="spin-hover inline-block">✨</span>
+            </p>
+            <div class="mt-3 flex flex-wrap justify-center md:justify-start gap-2">
+              <a
+                href="/about"
+                class="bg-gradient-to-r from-pink-400 to-pink-600 text-white px-4 py-2 text-sm rounded-full font-comic font-bold inline-block hover:scale-105 transition-transform jelly-hover"
+              >
+                About Me <span class="bounce-hover inline-block">😊</span>
+              </a>
+              <a
+                href="/projects"
+                class="bg-gradient-to-r from-blue-400 to-blue-600 text-white px-4 py-2 text-sm rounded-full font-comic font-bold inline-block hover:scale-105 transition-transform jelly-hover"
+              >
+                My Projects <span class="bounce-hover inline-block">🚀</span>
+              </a>
+              <a
+                href="/blog"
+                class="bg-gradient-to-r from-purple-400 to-purple-600 text-white px-4 py-2 text-sm rounded-full font-comic font-bold inline-block hover:scale-105 transition-transform jelly-hover"
+              >
+                Read My Blog <span class="bounce-hover inline-block">📝</span>
+              </a>
+              <ConfettiButton text="Click for celebration!" emoji="🎉" buttonClass="bg-rainbow-hover" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="md:col-span-2">
+        <!-- Skills Section -->
+        <section class="mb-6 slide-in-right">
+          <h2 class="text-2xl font-comic font-bold mb-4 dark:text-white"><span>My Powers</span> <span class="wiggle-hover inline-block">💪</span></h2>
+          <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-2">
+            {
+              skills.map((skill, index) => (
+                <div class="bg-white dark:bg-gray-800 dark:text-white rounded-lg p-2 shadow-md text-center transform hover:scale-105 transition-transform" style={`animation-delay: ${index * 0.1}s`}>
+                  <span class={`text-2xl mb-1 ${index % 2 === 0 ? 'tada-hover' : 'flip-hover'} inline-block`}>{skill.emoji}</span>
+                  <h3 class="font-comic font-bold text-sm">{skill.name}</h3>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="mb-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-comic font-bold dark:text-white"><span>Much Projects</span> <span class="wiggle-hover inline-block">🚀</span></h2>
+            <a href="/projects" class="text-sm bg-white dark:bg-gray-800 dark:text-white rounded-lg px-3 py-1 shadow-md inline-block font-comic font-bold hover:scale-105 transition-transform">
+              <span>View All</span>
+              <span class="bounce-hover inline-block">→</span>
+            </a>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {
+              projects.map((project, index) => (
+                <div class="bg-white dark:bg-gray-800 dark:text-white rounded-lg p-3 shadow-md transform hover:scale-105 transition-transform glitch-hover">
+                  <div class="flex items-center">
+                    <span class="text-2xl mr-2 tada-hover inline-block">{project.emoji}</span>
+                    <h3 class="text-lg font-comic font-bold">{project.title}</h3>
+                  </div>
+                  <p class="text-gray-600 dark:text-gray-300 font-comic text-sm mt-1">{project.description}</p>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="mb-6">
+          <h2 class="text-2xl font-comic font-bold mb-4 dark:text-white">Work History <span class="wiggle-hover inline-block">💻</span></h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {
+              experience.map((job) => (
+                <div class="bg-white dark:bg-gray-800 dark:text-white rounded-lg p-3 shadow-md transform hover:scale-105 transition-transform shake-hover">
+                  <div class="flex items-center mb-1">
+                    <span class="text-2xl mr-2 bounce-hover inline-block">{job.emoji}</span>
+                    <div>
+                      <h3 class="text-base font-comic font-bold">{job.company}</h3>
+                      <p class="text-gray-700 dark:text-gray-300 font-comic text-sm">
+                        {job.position} • {job.years}
+                      </p>
+                    </div>
+                  </div>
+                  <p class="text-gray-600 dark:text-gray-400 font-comic text-sm">{job.description}</p>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- Recent Blog Posts Section -->
+        <section class="mb-6">
+          <div class="flex justify-between items-center mb-3">
+            <h2 class="text-2xl font-comic font-bold dark:text-white"><span>Fresh Blog Posts</span> <span class="wiggle-hover inline-block">✨</span></h2>
+            <a href="/blog" class="text-sm bg-white dark:bg-gray-800 dark:text-white rounded-lg px-3 py-1 shadow-md inline-block font-comic font-bold hover:scale-105 transition-transform">
+              <span>View All</span>
+              <span class="bounce-hover inline-block">→</span>
+            </a>
+          </div>
+          <div class="grid grid-cols-1 gap-3">
+            {
+              sortedRecentPosts.map((post, index) => (
+                <a href={`/blog/${post.file.split('/').pop().split('.')[0]}`} class="block group">
+                  <div class="bg-white dark:bg-gray-800 dark:text-white rounded-lg overflow-hidden shadow-md h-full flex flex-row hover:bg-pink-50 dark:hover:bg-indigo-900 transition-colors duration-300">
+                    <div class="w-20 h-20 bg-gray-200 dark:bg-gray-700 relative flex-shrink-0">
+                      <OptimizedImage src={post.frontmatter.image} alt={post.frontmatter.title} class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-2 flex-grow">
+                      <h3 class="text-sm font-comic font-bold leading-tight">{post.frontmatter.title}</h3>
+                      <p class="text-gray-600 dark:text-gray-400 font-comic text-xs mt-1 line-clamp-2">{post.frontmatter.description}</p>
+                      <div class="mt-1">
+                        <p class="text-gray-500 dark:text-gray-500 font-comic text-xs">{new Date(post.frontmatter.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="text-center">
+          <div class="bg-white dark:bg-gray-800 dark:text-white rounded-lg p-4 shadow-md">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+              <div class="mb-3 md:mb-0">
+                <h2 class="text-2xl font-comic font-bold mb-1">Let's Be Friends! <span class="wiggle-hover inline-block">🤝</span></h2>
+                <p class="text-gray-600 dark:text-gray-300 font-comic text-sm">Always happy to connect with fellow developers!</p>
+              </div>
+              <div class="flex space-x-3">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="text-3xl hover:scale-110 transition-transform bounce-hover">👩‍💻</a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="text-3xl hover:scale-110 transition-transform bounce-hover">🐦</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-3xl hover:scale-110 transition-transform bounce-hover">💼</a>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <button id="show-toast-btn" class="bg-purple-100 dark:bg-purple-900 px-3 py-1 text-sm rounded-full font-comic font-bold shadow-md hover:shadow-lg transition-all">
+                Show Toast Message <span class="bounce-hover inline-block">🍞</span>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="md:col-span-1">
+        <!-- Newsletter Section -->
+        <section class="mb-6">
+          <NewsletterSignup />
+        </section>
+
+        <!-- Education Section -->
+        <section class="mb-6">
+          <h2 class="text-2xl font-comic font-bold mb-4 dark:text-white"><span>Learning Journey</span> <span class="wiggle-hover inline-block">📚</span></h2>
+          <div class="grid grid-cols-1 gap-3">
+            {
+              education.map((edu) => (
+                <div class="bg-white dark:bg-gray-800 dark:text-white rounded-lg p-3 shadow-md transform hover:scale-105 transition-transform bg-rainbow-hover">
+                  <div class="flex items-center">
+                    <span class="text-2xl mr-2 spin-hover inline-block">{edu.emoji}</span>
+                    <div>
+                      <h3 class="text-base font-comic font-bold">{edu.school}</h3>
+                      <p class="text-gray-700 dark:text-gray-300 font-comic text-sm">{edu.degree}</p>
+                      <p class="text-gray-600 dark:text-gray-400 font-comic text-xs">{edu.years}</p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="mb-6">
+          <h2 class="text-2xl font-comic font-bold mb-4 dark:text-white"><span>Fren Reviews</span> <span class="heartbeat inline-block">🧡</span></h2>
+          <div class="grid grid-cols-1 gap-3">
+            {
+              testimonials.map((testimonial) => (
+                <div class="bg-white dark:bg-gray-800 dark:text-white rounded-lg p-3 shadow-md transform hover:scale-105 transition-transform jelly-hover">
+                  <div class="flex items-start">
+                    <span class="text-2xl mr-2 spin-hover inline-block">{testimonial.emoji}</span>
+                    <div>
+                      <p class="text-gray-600 dark:text-gray-300 font-comic text-sm italic">"{testimonial.quote}"</p>
+                      <div class="text-right">
+                        <p class="font-comic font-bold text-sm">{testimonial.name}</p>
+                        <p class="text-gray-600 dark:text-gray-400 font-comic text-xs">{testimonial.position}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- Loader Demo Section -->
+        <section class="mb-6 bg-white dark:bg-gray-800 rounded-lg p-3 shadow-md">
+          <h2 class="text-lg font-comic font-bold mb-2 dark:text-white">Loading Demo <span class="wiggle-hover inline-block">⏳</span></h2>
+          <div class="flex justify-center">
+            <MemeLoader size="md" />
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Create floating doge effect
+  document.addEventListener('DOMContentLoaded', () => {
+    // Create and add random floating doges to the page
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => {
+        const doge = document.createElement('div')
+        doge.innerHTML = '🐕'
+        doge.style.position = 'fixed'
+        doge.style.fontSize = `${Math.random() * 20 + 20}px`
+        doge.style.left = `${Math.random() * 100}vw`
+        doge.style.top = `${Math.random() * 100}vh`
+        doge.style.opacity = '0.5'
+        doge.style.zIndex = '10'
+        doge.style.pointerEvents = 'none'
+        doge.style.transition = 'transform 3s ease-in-out, opacity 2s ease-in-out'
+        doge.classList.add('float')
+
+        document.body.appendChild(doge)
+
+        // Make the doge float up and fade out after a random time
+        setTimeout(
+          () => {
+            doge.style.transform = 'translateY(-100vh)'
+            doge.style.opacity = '0'
+
+            // Remove the element after animation
+            setTimeout(() => {
+              doge.remove()
+            }, 3000)
+          },
+          Math.random() * 5000 + 2000
+        )
+      }, i * 3000)
+    }
+
+    // Set up toast message demo
+    const toastBtn = document.getElementById('show-toast-btn')
+    if (toastBtn && window.showMemeToast) {
+      toastBtn.addEventListener('click', () => {
+        // Show a random toast message
+        const messages = ['Wow! Such toast! Very notify!', 'Good job clicking that button!', 'You found the secret toast!', 'Toast activated! System happy!', 'Achievement unlocked: Toast Master!']
+
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)]
+        const randomTypes = ['success', 'info', 'warning'] as const
+        const randomType = randomTypes[Math.floor(Math.random() * randomTypes.length)]
+
+        window.showMemeToast(randomMessage, {
+          type: randomType,
+          duration: 3000,
+          sound: true,
+        })
+      })
+    }
+  })
+</script>

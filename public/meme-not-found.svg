@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="256" fill="#FEF2F7" />
+  
+  <!-- Face -->
+  <circle cx="256" cy="256" r="150" fill="#FFDC9C" />
+  
+  <!-- Eyes -->
+  <ellipse cx="200" cy="216" rx="24" ry="28" fill="white" />
+  <ellipse cx="312" cy="216" rx="24" ry="28" fill="white" />
+  
+  <!-- Pupils - confused and spinning -->
+  <g>
+    <circle cx="204" cy="220" r="10" fill="#333">
+      <animateTransform 
+        attributeName="transform"
+        type="rotate"
+        from="0 200 216"
+        to="360 200 216"
+        dur="3s"
+        repeatCount="indefinite"
+      />
+    </circle>
+    <circle cx="316" cy="212" r="10" fill="#333">
+      <animateTransform 
+        attributeName="transform"
+        type="rotate"
+        from="0 312 216"
+        to="360 312 216"
+        dur="3s"
+        repeatCount="indefinite"
+      />
+    </circle>
+  </g>
+  
+  <!-- Confused mouth -->
+  <path d="M220 320 Q256 300 290 320" stroke="#333" stroke-width="6" stroke-linecap="round">
+    <animate 
+      attributeName="d" 
+      dur="2s"
+      repeatCount="indefinite"
+      values="M220 320 Q256 300 290 320; M220 320 Q256 330 290 320; M220 320 Q256 300 290 320"
+    />
+  </path>
+  
+  <!-- Sweat drop -->
+  <path d="M340 180 Q350 200 340 220" stroke="#77AAFF" stroke-width="5" fill="#AADDFF">
+    <animate
+      attributeName="opacity"
+      values="0;1;0"
+      dur="2s"
+      repeatCount="indefinite"
+    />
+  </path>
+  
+  <!-- Question marks -->
+  <text x="380" y="160" font-family="Comic Sans MS, sans-serif" font-size="48" fill="#FF77AA">?</text>
+  <text x="120" y="160" font-family="Comic Sans MS, sans-serif" font-size="48" fill="#77AAFF">?</text>
+  <text x="256" y="100" font-family="Comic Sans MS, sans-serif" font-size="48" fill="#AA77FF" text-anchor="middle">?</text>
+  
+  <!-- Spinning stars animation -->
+  <g>
+    <path d="M400 300 L410 320 L430 310 L420 330 L440 340 L415 345 L420 365 L405 350 L390 365 L395 345 L370 340 L390 330 L380 310 L400 320 Z" fill="#FFDD66">
+      <animateTransform 
+        attributeName="transform"
+        type="rotate"
+        from="0 400 330"
+        to="360 400 330"
+        dur="5s"
+        repeatCount="indefinite"
+      />
+    </path>
+    <path d="M120 330 L130 350 L150 340 L140 360 L160 370 L135 375 L140 395 L125 380 L110 395 L115 375 L90 370 L110 360 L100 340 L120 350 Z" fill="#FFDD66">
+      <animateTransform 
+        attributeName="transform"
+        type="rotate"
+        from="0 120 360"
+        to="360 120 360"
+        dur="5s"
+        repeatCount="indefinite"
+      />
+    </path>
+  </g>
+</svg> 

@@ -1,0 +1,72 @@
+<button 
+  id="theme-toggle" 
+  class="fixed bottom-4 right-4 z-50 bg-white dark:bg-gray-800 text-xl p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
+  aria-label="Toggle dark mode"
+>
+  <span class="sun hidden dark:inline-block spin-hover">☀️</span>
+  <span class="moon inline-block dark:hidden spin-hover">🌙</span>
+</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Function to set theme
+    function setTheme(isDark) {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+    
+    // Check for saved theme preference or use OS preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      setTheme(true);
+    }
+    
+    // Toggle theme on click
+    themeToggle?.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(!isDark);
+      
+      // Add animation effect when toggling
+      const toggleElement = document.getElementById('theme-toggle');
+      toggleElement?.classList.add('jelly-effect');
+      setTimeout(() => {
+        toggleElement?.classList.remove('jelly-effect');
+      }, 500);
+      
+      // Show toast notification if available
+      if (window.showMemeToast) {
+        window.showMemeToast(
+          !isDark ? 'Dark mode activated! 🌙' : 'Light mode activated! ☀️', 
+          {
+            type: 'info',
+            duration: 2000,
+            sound: true
+          }
+        );
+      }
+    });
+  });
+</script>
+
+<style>
+  .jelly-effect {
+    animation: jelly 0.5s;
+  }
+  
+  @keyframes jelly {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2, 0.8); }
+    50% { transform: scale(0.8, 1.2); }
+    75% { transform: scale(1.1, 0.9); }
+  }
+</style> 

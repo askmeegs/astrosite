@@ -1,0 +1,173 @@
+---
+// This component doesn't directly render a toast, but sets up the functionality
+// and styles for dynamically created toast notifications
+---
+
+<div id="toast-container" class="fixed top-20 right-5 z-60 flex flex-col gap-3 pointer-events-none"></div>
+
+<script>
+  // Define global type for the showMemeToast function
+  interface ToastOptions {
+    type?: 'success' | 'error' | 'info' | 'warning';
+    duration?: number;
+    emoji?: string;
+    sound?: boolean;
+  }
+
+  interface Window {
+    showMemeToast: (message: string, options?: ToastOptions) => HTMLElement;
+  }
+
+  // Create the global toast function
+  window.showMemeToast = (message, options = {}) => {
+    // Default options
+    const defaults = {
+      type: 'success', // success, error, info, warning
+      duration: 3000,
+      emoji: '',
+      sound: false
+    };
+    
+    // Merge default options with user provided options
+    const config = {...defaults, ...options};
+    
+    // Determine emoji if not provided - using cute wholesome emojis
+    if (!config.emoji) {
+      switch(config.type) {
+        case 'success': config.emoji = '✨'; break;
+        case 'error': config.emoji = '🙈'; break;
+        case 'info': config.emoji = '💭'; break;
+        case 'warning': config.emoji = '🌟'; break;
+        default: config.emoji = '🐕'; break;
+      }
+    }
+    
+    // Determine style based on type for both light and dark modes
+    let baseStyle;
+    switch(config.type) {
+      case 'success': 
+        baseStyle = 'bg-green-50 dark:bg-green-900/50 border-green-200 dark:border-green-700 text-green-800 dark:text-green-200'; 
+        break;
+      case 'error': 
+        baseStyle = 'bg-pink-50 dark:bg-pink-900/50 border-pink-200 dark:border-pink-700 text-pink-800 dark:text-pink-200'; 
+        break;
+      case 'info': 
+        baseStyle = 'bg-blue-50 dark:bg-blue-900/50 border-blue-200 dark:border-blue-700 text-blue-800 dark:text-blue-200'; 
+        break;
+      case 'warning': 
+        baseStyle = 'bg-yellow-50 dark:bg-yellow-900/50 border-yellow-200 dark:border-yellow-700 text-yellow-800 dark:text-yellow-200'; 
+        break;
+      default: 
+        baseStyle = 'bg-pink-50 dark:bg-pink-900/50 border-pink-200 dark:border-pink-700 text-pink-800 dark:text-pink-200'; 
+        break;
+    }
+    
+    // Check if dark mode is active
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    
+    // Create toast element with rounded edges
+    const toast = document.createElement('div');
+    toast.className = `toast font-comic px-4 py-3 rounded-xl shadow-md border-2 ${baseStyle} opacity-0 transform translate-x-full transition-all duration-500 pointer-events-auto max-w-sm backdrop-blur-sm`;
+    
+    // Add content to toast with wiggle animation on emoji
+    toast.innerHTML = `
+      <div class="flex items-center">
+        <span class="text-xl mr-2 wiggle-hover inline-block">${config.emoji}</span>
+        <span>${message}</span>
+      </div>
+    `;
+    
+    // Add to container
+    const container = document.getElementById('toast-container');
+    container?.appendChild(toast);
+    
+    // Play sound if enabled - using gentler sounds
+    if (config.sound) {
+      const audio = new Audio();
+      
+      // Different sounds for different types - soft sounds
+      switch(config.type) {
+        case 'success': audio.src = "https://assets.mixkit.co/sfx/preview/mixkit-software-interface-start-2574.mp3"; break;
+        case 'error': audio.src = "https://assets.mixkit.co/sfx/preview/mixkit-cute-little-kitty-meow-91.mp3"; break;
+        default: audio.src = "https://assets.mixkit.co/sfx/preview/mixkit-happy-bells-notification-937.mp3"; break;
+      }
+      
+      audio.volume = 0.4; // Lower volume for gentler sounds
+      audio.play().catch(e => console.warn("Could not play sound:", e));
+    }
+    
+    // Animate in with gentle easing
+    setTimeout(() => {
+      toast.classList.replace('opacity-0', 'opacity-100');
+      toast.classList.replace('translate-x-full', 'translate-x-0');
+      
+      // Add hover effect and tap to dismiss
+      toast.addEventListener('mouseenter', () => {
+        if (isDarkMode) {
+          toast.classList.add('dark-rainbow-hover');
+        } else {
+          toast.classList.add('bg-rainbow-hover');
+        }
+      });
+      
+      toast.addEventListener('mouseleave', () => {
+        toast.classList.remove('bg-rainbow-hover', 'dark-rainbow-hover');
+      });
+      
+      toast.addEventListener('click', () => {
+        dismissToast(toast);
+      });
+    }, 10);
+    
+    // Auto dismiss after duration
+    setTimeout(() => {
+      dismissToast(toast);
+    }, config.duration);
+    
+    // Function to dismiss toast with gentle animation
+    function dismissToast(element) {
+      element.classList.replace('opacity-100', 'opacity-0');
+      element.classList.replace('translate-x-0', 'translate-x-full');
+      
+      // Remove from DOM after animation
+      setTimeout(() => {
+        element.remove();
+      }, 500); // Match the duration-500 class
+    }
+    
+    // Return the toast element in case further manipulation is needed
+    return toast;
+  };
+  
+  // Demo toast on page load to show it's working properly
+  document.addEventListener('DOMContentLoaded', () => {
+    // 移除自动显示的演示 toast
+    /* 
+    setTimeout(() => {
+      window.showMemeToast('Theme system is ready! 🌈', {
+        type: 'success',
+        sound: false,
+        duration: 2000
+      });
+    }, 1000);
+    */
+  });
+</script>
+
+<style>
+  /* 添加自定义z-index以确保高于navbar */
+  .z-60 {
+    z-index: 60;
+  }
+  
+  /* 自定义悬停效果 */
+  .bg-rainbow-hover {
+    background: linear-gradient(45deg, rgba(255, 226, 236, 0.7), rgba(224, 231, 255, 0.7)) !important;
+    transition: background 0.3s ease;
+  }
+  
+  .dark-rainbow-hover {
+    background: linear-gradient(45deg, rgba(66, 39, 90, 0.7), rgba(39, 49, 90, 0.7)) !important;
+    transition: background 0.3s ease;
+  }
+</style> 

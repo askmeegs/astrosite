@@ -1,0 +1,251 @@
+/* Wholesome Meme Animations */
+
+/* 
+ * Animation Theme Guidelines:
+ * - Soft, cute movements (no harsh or aggressive animations)
+ * - Playful but not chaotic
+ * - Consistent timing (0.5-1.5s for most effects)
+ * - Pastel color palette
+ * - Consistent easing functions (mostly ease, ease-in-out)
+ */
+
+/* Bounce animation for emoji and icons - playful up/down movement */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.bounce-hover:hover {
+  animation: bounce 0.8s ease-in-out infinite;
+}
+
+/* Wiggle animation for cute elements - gentle side-to-side rotation */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+}
+
+.wiggle-hover:hover {
+  animation: wiggle 0.7s ease-in-out infinite;
+}
+
+/* Spin animation for loading or happy states - smooth rotation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spin-hover:hover {
+  animation: spin 1.2s ease-in-out infinite;
+}
+
+/* Heart beat animation - gentle pulsing like a heartbeat */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.heartbeat {
+  animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+/* Rainbow text animation - happy color cycling */
+@keyframes rainbow {
+  0% { color: #ff9aa2; }
+  16.66% { color: #ffb7b2; }
+  33.33% { color: #ffdac1; }
+  50% { color: #e2f0cb; }
+  66.66% { color: #b5ead7; }
+  83.33% { color: #c7ceea; }
+  100% { color: #ff9aa2; }
+}
+
+.rainbow-text {
+  animation: rainbow 3s ease-in-out infinite;
+}
+
+/* Tada animation for achievements or celebrations - happy bounce/rotate */
+@keyframes tada {
+  0% { transform: scale(1) rotate(0deg); }
+  10%, 20% { transform: scale(0.95) rotate(-3deg); }
+  30%, 50%, 70%, 90% { transform: scale(1.05) rotate(3deg); }
+  40%, 60%, 80% { transform: scale(1.05) rotate(-3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.tada-hover:hover {
+  animation: tada 1s ease;
+}
+
+/* Float animation for light elements - gentle hovering */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Shooting star animation for page transitions - magical effect */
+@keyframes shooting-star {
+  0% { 
+    transform: translateX(-100px) translateY(100px) rotate(45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% { 
+    transform: translateX(calc(100vw + 100px)) translateY(-100px) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+.shooting-star {
+  position: fixed;
+  width: 180px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #fff, transparent);
+  animation: shooting-star 8s ease-in-out infinite;
+  z-index: 10;
+}
+
+.shooting-star::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  top: -4px;
+  right: 0;
+  box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+}
+
+/* Jelly animation for squishy, bouncy elements - cute squash and stretch */
+@keyframes jelly {
+  0%, 100% { transform: scale(1, 1); }
+  25% { transform: scale(0.96, 1.04); }
+  50% { transform: scale(1.04, 0.96); }
+  75% { transform: scale(0.96, 1.04); }
+}
+
+.jelly-hover:hover {
+  animation: jelly 0.8s ease;
+}
+
+/* Glitch effect for techy elements - subtle glitch */
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-3px, 3px); }
+  40% { transform: translate(-3px, -3px); }
+  60% { transform: translate(3px, 3px); }
+  80% { transform: translate(3px, -3px); }
+}
+
+.glitch-hover:hover {
+  animation: glitch 0.5s ease;
+}
+
+/* Flip animation - smooth rotation */
+@keyframes flip {
+  0% { transform: perspective(400px) rotateY(0); }
+  100% { transform: perspective(400px) rotateY(360deg); }
+}
+
+.flip-hover:hover {
+  animation: flip 1.2s ease-in-out;
+}
+
+/* Shake animation for elements that need attention - gentle shake */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+.shake-hover:hover {
+  animation: shake 0.6s ease-in-out;
+}
+
+/* Pulsate animation for glowing effect - gentle fading */
+@keyframes pulsate {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.pulsate {
+  animation: pulsate 2s ease-in-out infinite;
+}
+
+/* Slide-in from left animation - smooth entrance */
+@keyframes slide-in-left {
+  0% { 
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% { 
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-left {
+  animation: slide-in-left 0.6s ease-out forwards;
+}
+
+/* Slide-in from right animation - smooth entrance */
+@keyframes slide-in-right {
+  0% { 
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% { 
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-right {
+  animation: slide-in-right 0.6s ease-out forwards;
+}
+
+/* Pop-in animation - cute appearance */
+@keyframes pop-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.pop-in {
+  animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Background rainbow animation - pastel color cycling */
+@keyframes bg-rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.bg-rainbow-hover:hover {
+  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #c2e9fb);
+  background-size: 300% 300%;
+  animation: bg-rainbow 3s ease-in-out infinite;
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+} 

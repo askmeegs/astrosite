@@ -1,0 +1,99 @@
+---
+const { text = "Celebrate!", emoji = "🎉", buttonClass = "" } = Astro.props;
+---
+
+<button id="confetti-button" class={`confetti-button bg-white dark:bg-gray-800 text-gray-800 dark:text-white px-4 py-2 rounded-full font-comic font-bold shadow-md hover:shadow-lg transition-all ${buttonClass}`}>
+  {text} <span class="bounce-hover inline-block">{emoji}</span>
+</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const confettiButton = document.getElementById('confetti-button');
+    
+    confettiButton?.addEventListener('click', () => {
+      createConfetti();
+    });
+    
+    function createConfetti() {
+      // Pastel colors that match our wholesome theme
+      const colors = [
+        '#FF9AA2', '#FFB7B2', '#FFDAC1', '#E2F0CB', 
+        '#B5EAD7', '#C7CEEA', '#FDFFB6', '#A6C1EE'
+      ];
+      
+      // Cute emojis that match our theme
+      const emojis = ['🎉', '✨', '💖', '🌈', '🦄', '🧁', '🍭', '🌟', '🎀', '☁️'];
+      
+      // Create container for the confetti pieces
+      const confettiContainer = document.createElement('div');
+      confettiContainer.style.position = 'fixed';
+      confettiContainer.style.top = '0';
+      confettiContainer.style.left = '0';
+      confettiContainer.style.width = '100%';
+      confettiContainer.style.height = '100%';
+      confettiContainer.style.pointerEvents = 'none';
+      confettiContainer.style.zIndex = '30';
+      document.body.appendChild(confettiContainer);
+      
+      // Create confetti pieces - reduced number for less chaos
+      const pieces = 80;
+      
+      for (let i = 0; i < pieces; i++) {
+        setTimeout(() => {
+          const piece = document.createElement('div');
+          
+          // Randomly decide if this piece is emoji or shape
+          const isEmoji = Math.random() > 0.6;
+          
+          if (isEmoji) {
+            // Create emoji confetti
+            piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            piece.style.fontSize = `${Math.random() * 16 + 10}px`; // Smaller, more consistent sizes
+          } else {
+            // Create shape confetti - more consistent shapes
+            const size = Math.random() * 8 + 5; // Smaller sizes
+            piece.style.width = `${size}px`;
+            piece.style.height = `${size}px`;
+            piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            piece.style.borderRadius = Math.random() > 0.3 ? '50%' : '0'; // More circles than squares
+          }
+          
+          // Common styles
+          piece.style.position = 'absolute';
+          piece.style.left = `${Math.random() * 100}vw`;
+          piece.style.top = '-20px';
+          piece.style.opacity = '1';
+          piece.style.pointerEvents = 'none';
+          piece.style.transition = `all ${Math.random() * 2 + 2}s ease-in-out`; // Smoother easing
+          piece.style.transform = 'rotate(0deg)';
+          
+          // Append to container
+          confettiContainer.appendChild(piece);
+          
+          // Start animation
+          setTimeout(() => {
+            // More gentle, constrained horizontal movement
+            const moveX = (Math.random() - 0.5) * 40;
+            // Consistent vertical fall
+            const moveY = window.innerHeight * (Math.random() * 0.6 + 0.4);
+            // Gentle rotation
+            const rotation = (Math.random() - 0.5) * 360;
+            
+            piece.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${rotation}deg)`;
+            piece.style.opacity = '0';
+          }, 10);
+          
+          // Remove pieces after animation
+          setTimeout(() => {
+            piece.remove();
+          }, 5000);
+        }, i * 25); // More consistent timing for smoother overall effect
+      }
+      
+      // Remove container after all animations complete
+      setTimeout(() => {
+        confettiContainer.remove();
+      }, 7000);
+    }
+  });
+</script> 

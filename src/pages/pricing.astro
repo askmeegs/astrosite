@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pricingPlans = [
+  {
+    name: 'Basic',
+    price: '$29',
+    features: [
+      'Complete source code',
+      'Responsive design',
+      'Dark mode support',
+      '1 month email support',
+      '72-hour response time'
+    ],
+    emoji: '🐶',
+    color: 'from-blue-400 to-blue-600'
+  },
+  {
+    name: 'Pro',
+    price: 'Custom',
+    features: [
+      'Everything in Basic',
+      'Custom feature development',
+      '6 months priority support',
+      'Implementation assistance',
+      'Theme customization'
+    ],
+    emoji: '🦄',
+    color: 'from-pink-400 to-pink-600',
+    popular: true
+  }
+];
+---
+
+<Layout title="Pricing | Wholesome Template">
+  <section class="py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-comic font-bold mb-4 dark:text-white">Template Pricing <span class="inline-block wiggle-hover">🎁</span></h1>
+      <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-comic">
+        Choose the perfect plan for your next personal project and get started today!
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4">
+      {pricingPlans.map((plan) => (
+        <div class={`rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 ${plan.popular ? 'ring-4 ring-pink-400 dark:ring-pink-600' : ''}`}>
+          <div class={`bg-gradient-to-br ${plan.color} text-white p-6 text-center`}>
+            {plan.popular && <div class="absolute top-4 right-4 bg-white text-pink-600 text-xs px-2 py-1 rounded-full font-comic font-bold animate-pulse">Popular</div>}
+            <span class="text-4xl block mb-2 spin-hover inline-block">{plan.emoji}</span>
+            <h3 class="text-xl font-comic font-bold">{plan.name}</h3>
+            <div class="mt-2">
+              <span class="text-3xl font-comic font-bold">{plan.price}</span>
+              <span class="text-sm opacity-75 font-comic"> one-time</span>
+            </div>
+          </div>
+          
+          <div class="bg-white dark:bg-gray-800 p-6">
+            <ul class="space-y-3">
+              {plan.features.map((feature) => (
+                <li class="flex items-center font-comic dark:text-white">
+                  <span class="mr-2 text-green-500">✓</span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            
+            <div class="mt-6 text-center">
+              {plan.popular ? (
+                <a 
+                  href="mailto:your.email@example.com?subject=Pro%20Template%20Inquiry" 
+                  class="inline-block px-6 py-3 rounded-full font-comic font-bold transition-all bg-pink-500 hover:bg-pink-600 text-white"
+                >
+                  Contact for Pro
+                </a>
+              ) : (
+                <a 
+                  href="https://github.com/your-username/wholesome-template" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-block px-6 py-3 rounded-full font-comic font-bold transition-all bg-white hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white border-2 border-gray-200 dark:border-gray-600"
+                >
+                  Get Basic Version
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="mt-16 text-center">
+      <div class="mt-12 bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 max-w-3xl mx-auto">
+        <h3 class="text-xl font-comic font-bold mb-4 dark:text-white">Frequently Asked Questions</h3>
+        
+        <div class="space-y-4">
+          <div>
+            <h4 class="font-comic font-bold dark:text-white">Is this a one-time payment?</h4>
+            <p class="text-gray-600 dark:text-gray-300 font-comic text-sm">Yes! You pay once and get lifetime access to the template.</p>
+          </div>
+          
+          <div>
+            <h4 class="font-comic font-bold dark:text-white">What's included in the support?</h4>
+            <p class="text-gray-600 dark:text-gray-300 font-comic text-sm">Basic includes 1 month of email support with 72-hour response time. Pro includes 6 months of priority support and custom feature development.</p>
+          </div>
+          
+          <div>
+            <h4 class="font-comic font-bold dark:text-white">How do I purchase the Pro version?</h4>
+            <p class="text-gray-600 dark:text-gray-300 font-comic text-sm">Contact us directly via email to discuss your specific requirements for the Pro version.</p>
+          </div>
+          
+          <div>
+            <h4 class="font-comic font-bold dark:text-white">Can I request custom features?</h4>
+            <p class="text-gray-600 dark:text-gray-300 font-comic text-sm">Custom feature development is included in the Pro plan. Basic plan users can upgrade to Pro if they need custom features.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout> 

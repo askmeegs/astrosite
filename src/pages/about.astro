@@ -1,0 +1,236 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const funFacts = [
+  { fact: "I can type with my eyes closed (but there are many typos)", emoji: "👨‍💻" },
+  { fact: "I once debugged code in my dreams and woke up with the solution", emoji: "💭" },
+  { fact: "My first computer was powered by hamsters (not really, but imagine!)", emoji: "🐹" },
+  { fact: "I name all my plants after programming languages", emoji: "🌱" },
+  { fact: "I can speak fluent binary (01001000 01101001)", emoji: "🤖" },
+  { fact: "My rubber duck has solved more bugs than StackOverflow", emoji: "🦆" }
+];
+
+const timeline = [
+  {
+    year: "2010",
+    title: "First Line of Code",
+    description: "Wrote 'Hello World' and thought I was a hackerman",
+    emoji: "👶"
+  },
+  {
+    year: "2014",
+    title: "Computer Science Journey Begins",
+    description: "Started formal education, discovered memes were the best way to learn",
+    emoji: "🎓"
+  },
+  {
+    year: "2016",
+    title: "First Real Project",
+    description: "Created a website that automatically generated dog puns",
+    emoji: "🐕"
+  },
+  {
+    year: "2018",
+    title: "Internship Adventures",
+    description: "Learned that coffee is the true programming language",
+    emoji: "☕"
+  },
+  {
+    year: "2020",
+    title: "Remote Work Life",
+    description: "Mastered the art of looking professional from the waist up",
+    emoji: "🏠"
+  },
+  {
+    year: "Present",
+    title: "Wholesome Coding",
+    description: "Spreading joy through clean code and silly comments",
+    emoji: "✨"
+  }
+];
+
+const interests = [
+  { name: "Mechanical Keyboards", emoji: "⌨️" },
+  { name: "Pixel Art", emoji: "🎮" },
+  { name: "Hiking", emoji: "🥾" },
+  { name: "Making Memes", emoji: "😂" },
+  { name: "Reading Sci-Fi", emoji: "🚀" },
+  { name: "Board Games", emoji: "🎲" }
+];
+---
+
+<Layout title="About Me | Wholesome Dev Portfolio">
+  <main class="pt-16 pb-24 bg-pink-50 dark:bg-gray-800">
+    <!-- Hero Section -->
+    <section class="container mx-auto px-4 py-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="md:w-1/2">
+          <h1 class="text-4xl md:text-5xl font-comic font-bold text-pink-600 dark:text-pink-400 mb-4">Hiya! I'm Doge Dev</h1>
+          <p class="text-lg text-gray-700 dark:text-gray-200 mb-6">
+            I'm a professional pupperino and part-time code wizard who specializes in creating wholesome experiences on the web. When I'm not chasing my tail, I'm chasing pixels and making the internet a more doggo-friendly place.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#" class="bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg font-comic transition-colors">
+              <i class="fas fa-envelope mr-2"></i> Bork at me
+            </a>
+            <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-comic transition-colors">
+              <i class="fab fa-twitter mr-2"></i> Follow my woofs
+            </a>
+          </div>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+          <img src="https://api.dicebear.com/9.x/big-ears/svg?flip=false" alt="Doge in business attire" class="w-full max-w-md rounded-3xl shadow-xl transform -rotate-3 transition-transform hover:rotate-0 duration-300">
+        </div>
+      </div>
+    </section>
+
+    <!-- Bio Section -->
+    <section class="container mx-auto px-4 py-12">
+      <h2 class="text-3xl font-comic font-bold text-center text-pink-600 dark:text-pink-400 mb-12">My Tail-wagging Journey</h2>
+      <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg">
+        <p class="text-lg text-gray-700 dark:text-gray-200 mb-6">
+          Born in the land of memes, I quickly realized my passion wasn't just for treats and belly rubs, but also for creating delightful digital experiences. With over 5 dog years of experience (that's 35 human years!), I've mastered the art of turning complex problems into simple, intuitive solutions.
+        </p>
+        <p class="text-lg text-gray-700 dark:text-gray-200 mb-6">
+          My design philosophy is simple: if it doesn't make you go "Wow, much amazing!" then it's not ready yet. I believe in creating websites that not only look good but feel good to use – like a perfectly thrown frisbee that's just begging to be caught.
+        </p>
+        <p class="text-lg text-gray-700 dark:text-gray-200">
+          When I'm not coding, you can find me at the park chasing squirrels, participating in local hackathons, or judging meme contests. I'm always open to new opportunities and collaborations, especially if they involve treats.
+        </p>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="container mx-auto px-4 py-12">
+      <h2 class="text-3xl font-comic font-bold text-center text-pink-600 dark:text-pink-400 mb-12">My Professional Timeline</h2>
+      <div class="relative">
+        <!-- Vertical Line -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-pink-300 dark:bg-pink-600"></div>
+        
+        <!-- Timeline Items -->
+        <div class="timeline-items">
+          <!-- Item 1 -->
+          <div class="relative flex justify-between items-center mb-16">
+            <div class="w-5/12"></div>
+            <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-pink-500 dark:bg-pink-400 rounded-full z-10 flex items-center justify-center">
+              <span class="text-white">1</span>
+            </div>
+            <div class="w-5/12 bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg">
+              <h3 class="text-xl font-comic font-bold text-pink-600 dark:text-pink-400 mb-2">2018 - Pupper Programmer</h3>
+              <p class="text-gray-700 dark:text-gray-200">Started my coding journey with HTML and CSS. Created my first website: "Doge's Doghouse".</p>
+            </div>
+          </div>
+          
+          <!-- Item 2 -->
+          <div class="relative flex justify-between items-center mb-16">
+            <div class="w-5/12 bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg text-right">
+              <h3 class="text-xl font-comic font-bold text-pink-600 dark:text-pink-400 mb-2">2019 - Junior Barkend Developer</h3>
+              <p class="text-gray-700 dark:text-gray-200">Learned JavaScript and built my first interactive web apps. Joined the "Paws for Code" bootcamp.</p>
+            </div>
+            <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-pink-500 dark:bg-pink-400 rounded-full z-10 flex items-center justify-center">
+              <span class="text-white">2</span>
+            </div>
+            <div class="w-5/12"></div>
+          </div>
+          
+          <!-- Item 3 -->
+          <div class="relative flex justify-between items-center mb-16">
+            <div class="w-5/12"></div>
+            <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-pink-500 dark:bg-pink-400 rounded-full z-10 flex items-center justify-center">
+              <span class="text-white">3</span>
+            </div>
+            <div class="w-5/12 bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg">
+              <h3 class="text-xl font-comic font-bold text-pink-600 dark:text-pink-400 mb-2">2020 - Full Stack Dogveloper</h3>
+              <p class="text-gray-700 dark:text-gray-200">Mastered React, Node, and database technologies. Launched "Bork Book" - a social network for dogs.</p>
+            </div>
+          </div>
+          
+          <!-- Item 4 -->
+          <div class="relative flex justify-between items-center">
+            <div class="w-5/12 bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg text-right">
+              <h3 class="text-xl font-comic font-bold text-pink-600 dark:text-pink-400 mb-2">2021 - Present: Senior Doge Developer</h3>
+              <p class="text-gray-700 dark:text-gray-200">Lead developer at WoofWare Inc. Specializing in creating paw-some web experiences and mentoring junior puppers.</p>
+            </div>
+            <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-pink-500 dark:bg-pink-400 rounded-full z-10 flex items-center justify-center">
+              <span class="text-white">4</span>
+            </div>
+            <div class="w-5/12"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fun Facts -->
+    <section class="container mx-auto px-4 py-12">
+      <h2 class="text-3xl font-comic font-bold text-center text-pink-600 dark:text-pink-400 mb-12">Fun Facts About Me</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Fact 1 -->
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <div class="text-4xl mb-4">🦴</div>
+          <h3 class="text-xl font-comic font-bold text-pink-600 dark:text-pink-400 mb-2">Bones Buried</h3>
+          <p class="text-gray-700 dark:text-gray-200">I've buried over 127 bones in my backyard. I keep a spreadsheet to track them all.</p>
+        </div>
+        
+        <!-- Fact 2 -->
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <div class="text-4xl mb-4">🎮</div>
+          <h3 class="text-xl font-comic font-bold text-pink-600 dark:text-pink-400 mb-2">Gaming Champion</h3>
+          <p class="text-gray-700 dark:text-gray-200">I hold the world record for "Fetch Simulator 2021" with a perfect score of 15/10.</p>
+        </div>
+        
+        <!-- Fact 3 -->
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <div class="text-4xl mb-4">🍕</div>
+          <h3 class="text-xl font-comic font-bold text-pink-600 dark:text-pink-400 mb-2">Pizza Enthusiast</h3>
+          <p class="text-gray-700 dark:text-gray-200">I've tried 42 different pizza toppings. Bacon is obviously the best, followed closely by more bacon.</p>
+        </div>
+        
+        <!-- Fact 4 -->
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <div class="text-4xl mb-4">🎨</div>
+          <h3 class="text-xl font-comic font-bold text-pink-600 dark:text-pink-400 mb-2">Secret Artist</h3>
+          <p class="text-gray-700 dark:text-gray-200">I paint abstract art using my tail. My pieces have been displayed in three local coffee shops.</p>
+        </div>
+        
+        <!-- Fact 5 -->
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <div class="text-4xl mb-4">🏆</div>
+          <h3 class="text-xl font-comic font-bold text-pink-600 dark:text-pink-400 mb-2">Award Winner</h3>
+          <p class="text-gray-700 dark:text-gray-200">I won "Most Likely to Confuse a Semicolon with a Colon" in coding boot camp.</p>
+        </div>
+        
+        <!-- Fact 6 -->
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <div class="text-4xl mb-4">🌙</div>
+          <h3 class="text-xl font-comic font-bold text-pink-600 dark:text-pink-400 mb-2">Night Owl</h3>
+          <p class="text-gray-700 dark:text-gray-200">I do my best coding between 2-4 AM. My neighbors love hearing my excited barks when I solve a bug.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="text-center mb-4 mx-4">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-3 md:mb-0">
+            <h2 class="text-2xl font-comic font-bold mb-1 dark:text-white">Let's Create Something Wholesome! ✨</h2>
+            <p class="text-gray-600 dark:text-gray-300 font-comic text-sm mb-2">
+              I'm always open to new opportunities, collaborations, or just chatting about code and memes.
+            </p>
+          </div>
+          <div class="flex flex-wrap justify-center gap-2">
+            <a href="/" class="bg-gradient-to-r from-pink-400 to-pink-600 text-white px-4 py-2 text-sm rounded-full font-comic font-bold inline-block hover:scale-105 transition-transform">
+              Back to Home
+            </a>
+            <a href="/blog" class="bg-white dark:bg-gray-700 border-2 border-pink-400 dark:border-pink-500 text-pink-600 dark:text-pink-300 px-4 py-2 text-sm rounded-full font-comic font-bold inline-block hover:scale-105 transition-transform">
+              Read My Blog
+            </a>
+            <a href="/projects" class="bg-white dark:bg-gray-700 border-2 border-pink-400 dark:border-pink-500 text-pink-600 dark:text-pink-300 px-4 py-2 text-sm rounded-full font-comic font-bold inline-block hover:scale-105 transition-transform">
+              See My Projects
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout> 

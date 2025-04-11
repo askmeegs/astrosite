@@ -1,0 +1,124 @@
+---
+interface Props {
+  title: string;
+  url: string;
+  description?: string;
+}
+
+const { title, url, description = "Check out this awesome content!" } = Astro.props;
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(title);
+const encodedDescription = encodeURIComponent(description);
+---
+
+<div class="social-share my-4">
+  <div class="text-center mb-2">
+    <h3 class="font-comic text-sm font-bold dark:text-white">Share this <span class="wiggle-hover inline-block">✨</span></h3>
+  </div>
+  
+  <div class="flex justify-center space-x-3">
+    <!-- Twitter/X Share -->
+    <a 
+      href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="bg-blue-400 dark:bg-blue-700 text-white p-2 rounded-full hover:scale-110 transition-transform"
+      aria-label="Share on Twitter"
+      title="Share on Twitter"
+    >
+      <span class="text-lg bounce-hover inline-block">🐦</span>
+    </a>
+    
+    <!-- Facebook Share -->
+    <a 
+      href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="bg-blue-600 dark:bg-blue-800 text-white p-2 rounded-full hover:scale-110 transition-transform"
+      aria-label="Share on Facebook"
+      title="Share on Facebook"
+    >
+      <span class="text-lg bounce-hover inline-block">👍</span>
+    </a>
+    
+    <!-- LinkedIn Share -->
+    <a 
+      href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodedDescription}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="bg-blue-800 dark:bg-blue-900 text-white p-2 rounded-full hover:scale-110 transition-transform"
+      aria-label="Share on LinkedIn"
+      title="Share on LinkedIn"
+    >
+      <span class="text-lg bounce-hover inline-block">💼</span>
+    </a>
+    
+    <!-- Email Share -->
+    <a 
+      href={`mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%0A${encodedUrl}`}
+      class="bg-red-400 dark:bg-red-700 text-white p-2 rounded-full hover:scale-110 transition-transform"
+      aria-label="Share via Email"
+      title="Share via Email"
+    >
+      <span class="text-lg bounce-hover inline-block">📧</span>
+    </a>
+    
+    <!-- Copy Link Button -->
+    <button 
+      id="copy-link-btn"
+      class="bg-purple-400 dark:bg-purple-700 text-white p-2 rounded-full hover:scale-110 transition-transform"
+      aria-label="Copy link"
+      title="Copy link to clipboard"
+      data-url={url}
+    >
+      <span class="text-lg bounce-hover inline-block copy-icon">🔗</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const copyLinkBtn = document.getElementById('copy-link-btn');
+    
+    if (copyLinkBtn) {
+      copyLinkBtn.addEventListener('click', async () => {
+        const url = copyLinkBtn.getAttribute('data-url') || window.location.href;
+        
+        try {
+          await navigator.clipboard.writeText(url);
+          
+          // Visual feedback
+          const icon = copyLinkBtn.querySelector('.copy-icon');
+          if (icon) {
+            const originalContent = icon.innerHTML;
+            icon.innerHTML = '✅';
+            
+            // Reset after a delay
+            setTimeout(() => {
+              icon.innerHTML = originalContent;
+            }, 2000);
+          }
+          
+          // Show toast notification if available
+          if (window.showMemeToast) {
+            window.showMemeToast('Link copied to clipboard! 🔗', {
+              type: 'success',
+              duration: 2000,
+              sound: true
+            });
+          }
+        } catch (err) {
+          console.error('Failed to copy link:', err);
+          
+          // Show error toast if available
+          if (window.showMemeToast) {
+            window.showMemeToast('Could not copy link 😢', {
+              type: 'error',
+              duration: 2000
+            });
+          }
+        }
+      });
+    }
+  });
+</script> 

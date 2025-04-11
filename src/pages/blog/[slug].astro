@@ -1,0 +1,163 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { marked } from 'marked';
+
+export async function getStaticPaths() {
+  const posts = await Astro.glob('../../blogs/*.md');
+  
+  return posts.map(post => {
+    const slug = post.file.split('/').pop().split('.')[0];
+    return {
+      params: { slug },
+      props: { post }
+    };
+  });
+}
+
+const { post } = Astro.props;
+const { Content } = post;
+
+// Format date
+const formattedDate = new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<Layout title={`${post.frontmatter.title} | Wholesome Dev`}>
+  <main class="container mx-auto px-4 py-8">
+    <article class="max-w-3xl mx-auto">
+      <!-- Post Header -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg mb-8 text-center">
+        <img 
+          src={post.frontmatter.image} 
+          alt={post.frontmatter.title}
+          class="w-24 h-24 mx-auto mb-4"
+        />
+        <h1 class="text-4xl font-comic font-bold mb-4 dark:text-white">{post.frontmatter.title}</h1>
+        <p class="text-gray-600 dark:text-gray-400 font-comic mb-4">{formattedDate}</p>
+        <div class="flex flex-wrap justify-center gap-2 mb-4">
+          {post.frontmatter.tags.map((tag) => (
+            <span class="bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 px-3 py-1 rounded-full font-comic">#{tag}</span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Post Content -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-md mb-8">
+        <div class="prose prose-lg max-w-none font-comic blog-content dark:prose-invert">
+          <Content />
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="flex justify-between">
+        <a href="/blog" class="bg-white dark:bg-gray-800 dark:text-white rounded-lg p-4 shadow-md inline-block font-comic font-bold hover:scale-105 transition-transform">
+          ← All Posts
+        </a>
+        <a href="/" class="bg-white dark:bg-gray-800 dark:text-white rounded-lg p-4 shadow-md inline-block font-comic font-bold hover:scale-105 transition-transform">
+          Home Page
+        </a>
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style is:global>
+  .blog-content h1 {
+    font-size: 2.25rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Comic Neue', cursive;
+  }
+  
+  .blog-content h2 {
+    font-size: 1.875rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Comic Neue', cursive;
+  }
+  
+  .blog-content h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Comic Neue', cursive;
+  }
+  
+  .blog-content p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    font-family: 'Comic Neue', cursive;
+  }
+  
+  .blog-content ul, .blog-content ol {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    font-family: 'Comic Neue', cursive;
+  }
+  
+  .blog-content li {
+    margin-bottom: 0.5rem;
+    font-family: 'Comic Neue', cursive;
+  }
+  
+  .blog-content blockquote {
+    border-left: 4px solid #f9a8d4;
+    padding-left: 1rem;
+    font-style: italic;
+    margin: 1.5rem 0;
+    background-color: #fdf2f8;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-family: 'Comic Neue', cursive;
+  }
+
+  .dark .blog-content blockquote {
+    border-left-color: #be185d;
+    background-color: rgba(190, 24, 93, 0.1);
+    color: #f9a8d4;
+  }
+  
+  .blog-content a {
+    color: #db2777;
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+  
+  .blog-content a:hover {
+    color: #be185d;
+  }
+
+  .dark .blog-content a {
+    color: #f472b6;
+  }
+  
+  .dark .blog-content a:hover {
+    color: #f9a8d4;
+  }
+  
+  .blog-content pre {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+  
+  .blog-content code {
+    font-family: 'Courier New', monospace;
+  }
+  
+  .blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+  }
+</style> 

@@ -1,0 +1,320 @@
+<div id="theme-customizer" class="fixed left-4 bottom-4 z-50">
+  <button 
+    id="theme-customizer-toggle" 
+    class="bg-white dark:bg-gray-800 text-xl p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
+    aria-label="Customize theme"
+    title="Customize theme"
+  >
+    <span class="text-lg bounce-hover inline-block">🎨</span>
+  </button>
+  
+  <div id="theme-customizer-panel" class="hidden absolute bottom-16 left-0 bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 w-64">
+    <h3 class="font-comic font-bold text-lg mb-3 dark:text-white">Customize Theme <span class="wiggle-hover inline-block">✨</span></h3>
+    
+    <div class="space-y-3">
+      <!-- Font Size -->
+      <div>
+        <label class="block font-comic text-sm font-bold mb-1 dark:text-white">Font Size</label>
+        <div class="flex items-center space-x-1">
+          <button id="font-size-decrease" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 flex items-center justify-center">
+            <span class="text-sm dark:text-white">A-</span>
+          </button>
+          <input 
+            type="range" 
+            id="font-size-slider" 
+            min="80" 
+            max="120" 
+            value="100" 
+            class="w-full h-2 rounded-full bg-gray-300 dark:bg-gray-700 appearance-none cursor-pointer"
+          />
+          <button id="font-size-increase" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 flex items-center justify-center">
+            <span class="text-sm dark:text-white">A+</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Animation Speed -->
+      <div>
+        <label class="block font-comic text-sm font-bold mb-1 dark:text-white">Animation Speed</label>
+        <div class="flex items-center space-x-2">
+          <span class="text-xs dark:text-white">Slow</span>
+          <input 
+            type="range" 
+            id="animation-speed-slider" 
+            min="50" 
+            max="150" 
+            value="100" 
+            class="w-full h-2 rounded-full bg-gray-300 dark:bg-gray-700 appearance-none cursor-pointer"
+          />
+          <span class="text-xs dark:text-white">Fast</span>
+        </div>
+      </div>
+      
+      <!-- Reduce Motion -->
+      <div class="flex items-center">
+        <input 
+          type="checkbox" 
+          id="reduce-motion" 
+          class="mr-2 h-5 w-5 text-pink-500 focus:ring-pink-400 dark:focus:ring-indigo-600 rounded"
+        />
+        <label for="reduce-motion" class="text-sm font-comic dark:text-white">
+          Reduce motion
+        </label>
+      </div>
+      
+      <div class="pt-2">
+        <button 
+          id="reset-theme" 
+          class="w-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 font-comic py-1 px-2 rounded-full text-sm transition-colors dark:text-white"
+        >
+          Reset to Default
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const html = document.documentElement;
+    const themeCustomizerToggle = document.getElementById('theme-customizer-toggle');
+    const themeCustomizerPanel = document.getElementById('theme-customizer-panel');
+    const fontSizeSlider = document.getElementById('font-size-slider') as HTMLInputElement;
+    const fontSizeDecrease = document.getElementById('font-size-decrease');
+    const fontSizeIncrease = document.getElementById('font-size-increase');
+    const animationSpeedSlider = document.getElementById('animation-speed-slider') as HTMLInputElement;
+    const reduceMotion = document.getElementById('reduce-motion') as HTMLInputElement;
+    const resetTheme = document.getElementById('reset-theme');
+    
+    // Load saved settings
+    const loadSettings = () => {
+      // Font size
+      const savedFontSize = localStorage.getItem('font-size') || '100';
+      fontSizeSlider.value = savedFontSize;
+      applyFontSize(parseInt(savedFontSize));
+      
+      // Animation speed
+      const savedAnimationSpeed = localStorage.getItem('animation-speed') || '100';
+      animationSpeedSlider.value = savedAnimationSpeed;
+      applyAnimationSpeed(parseInt(savedAnimationSpeed));
+      
+      // Reduce motion
+      const savedReduceMotion = localStorage.getItem('reduce-motion') === 'true';
+      reduceMotion.checked = savedReduceMotion;
+      applyReduceMotion(savedReduceMotion);
+    };
+    
+    // Apply font size
+    const applyFontSize = (size) => {
+      html.style.fontSize = `${size}%`;
+      localStorage.setItem('font-size', size.toString());
+    };
+    
+    // Apply animation speed
+    const applyAnimationSpeed = (speed) => {
+      // Calculate animation speed factor (1 is normal, 0.5 is slower, 1.5 is faster)
+      const factor = speed / 100;
+      document.documentElement.style.setProperty('--animation-speed-factor', factor.toString());
+      localStorage.setItem('animation-speed', speed.toString());
+    };
+    
+    // Apply reduce motion
+    const applyReduceMotion = (reduce) => {
+      if (reduce) {
+        html.classList.add('reduce-motion');
+      } else {
+        html.classList.remove('reduce-motion');
+      }
+      localStorage.setItem('reduce-motion', reduce.toString());
+    };
+    
+    // Reset theme settings
+    const resetThemeSettings = () => {
+      applyFontSize(100);
+      applyAnimationSpeed(100);
+      applyReduceMotion(false);
+      
+      fontSizeSlider.value = '100';
+      animationSpeedSlider.value = '100';
+      reduceMotion.checked = false;
+      
+      // Show toast if available
+      if (window.showMemeToast) {
+        window.showMemeToast('Theme reset to default! 🎨', {
+          type: 'info',
+          duration: 2000
+        });
+      }
+    };
+    
+    // Toggle panel
+    themeCustomizerToggle?.addEventListener('click', () => {
+      themeCustomizerPanel?.classList.toggle('hidden');
+      
+      // Add animation
+      if (!themeCustomizerPanel?.classList.contains('hidden')) {
+        themeCustomizerPanel?.classList.add('animate-slide-in');
+        setTimeout(() => {
+          themeCustomizerPanel?.classList.remove('animate-slide-in');
+        }, 300);
+      }
+    });
+    
+    // Close panel when clicking outside
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      if (
+        !target.closest('#theme-customizer-toggle') && 
+        !target.closest('#theme-customizer-panel') && 
+        themeCustomizerPanel && 
+        !themeCustomizerPanel.classList.contains('hidden')
+      ) {
+        themeCustomizerPanel.classList.add('hidden');
+      }
+    });
+    
+    // Font size slider
+    fontSizeSlider?.addEventListener('input', () => {
+      const size = parseInt(fontSizeSlider.value);
+      applyFontSize(size);
+    });
+    
+    // Font size buttons
+    fontSizeDecrease?.addEventListener('click', () => {
+      const currentSize = parseInt(fontSizeSlider.value);
+      const newSize = Math.max(80, currentSize - 5);
+      fontSizeSlider.value = newSize.toString();
+      applyFontSize(newSize);
+    });
+    
+    fontSizeIncrease?.addEventListener('click', () => {
+      const currentSize = parseInt(fontSizeSlider.value);
+      const newSize = Math.min(120, currentSize + 5);
+      fontSizeSlider.value = newSize.toString();
+      applyFontSize(newSize);
+    });
+    
+    // Animation speed slider
+    animationSpeedSlider?.addEventListener('input', () => {
+      const speed = parseInt(animationSpeedSlider.value);
+      applyAnimationSpeed(speed);
+    });
+    
+    // Reduce motion checkbox
+    reduceMotion?.addEventListener('change', () => {
+      applyReduceMotion(reduceMotion.checked);
+      
+      // Show toast if available
+      if (window.showMemeToast) {
+        const message = reduceMotion.checked 
+          ? 'Reduced motion enabled! 🦥' 
+          : 'Full animations enabled! 🚀';
+        
+        window.showMemeToast(message, {
+          type: 'info',
+          duration: 2000
+        });
+      }
+    });
+    
+    // Reset button
+    resetTheme?.addEventListener('click', resetThemeSettings);
+    
+    // Load settings on init
+    loadSettings();
+  });
+</script>
+
+<style>
+  /* Custom styling for range inputs */
+  input[type=range] {
+    -webkit-appearance: none;
+    height: 8px;
+    border-radius: 5px;
+  }
+  
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #ec4899;
+    cursor: pointer;
+    margin-top: -5px;
+  }
+  
+  input[type=range]::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #ec4899;
+    cursor: pointer;
+  }
+  
+  /* Dark mode adjustments */
+  .dark input[type=range]::-webkit-slider-thumb {
+    background: #be185d;
+  }
+  
+  .dark input[type=range]::-moz-range-thumb {
+    background: #be185d;
+  }
+  
+  /* Animation for panel opening */
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out forwards;
+  }
+  
+  /* Bounce animation for emoji */
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+  
+  .bounce-hover:hover {
+    animation: bounce 0.5s infinite;
+  }
+  
+  /* Wiggle animation */
+  @keyframes wiggle {
+    0%, 100% {
+      transform: rotate(0);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    75% {
+      transform: rotate(10deg);
+    }
+  }
+  
+  .wiggle-hover:hover {
+    animation: wiggle 0.5s ease-in-out;
+  }
+  
+  /* Reduce motion utility class */
+  .reduce-motion * {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+  
+  .reduce-motion .bounce-hover:hover,
+  .reduce-motion .wiggle-hover:hover {
+    animation: none !important;
+  }
+</style> 

@@ -1,0 +1,109 @@
+---
+import { siteConfig } from '../data/siteConfig';
+import SEO from '../components/SEO.astro';
+import Navbar from '../components/Navbar.astro';
+import MemeFollower from '../components/MemeFollower.astro';
+import MemeToast from '../components/MemeToast.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import ThemeCustomizer from '../components/ThemeCustomizer.astro';
+import PromoBanner from '../components/PromoBanner.astro';
+import '../styles/animations.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
+  type?: string;
+  article?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    tags?: string[];
+  };
+}
+
+const { 
+  title = siteConfig.title,
+  description = siteConfig.description,
+  image = siteConfig.ogImage,
+  canonicalURL = Astro.url.href,
+  type = 'website',
+  article
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={siteConfig.language.split('-')[0]}>
+  <head>
+    <SEO 
+      title={title}
+      description={description}
+      image={image}
+      canonicalURL={canonicalURL}
+      type={type}
+      article={article}
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Script for dark mode -->
+    <script is:inline>
+      // Initialize dark mode based on localStorage or OS preference
+      function initializeTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      
+      // Check and initialize color theme from localStorage
+      function initializeColorTheme() {
+        const savedColorTheme = localStorage.getItem('color-theme');
+        
+        // Remove any existing theme classes
+        document.documentElement.classList.remove('theme-pink', 'theme-purple', 'theme-blue', 'theme-green', 'theme-yellow');
+        
+        if (savedColorTheme) {
+          document.documentElement.classList.add(`theme-${savedColorTheme}`);
+        } else {
+          // Default theme
+          document.documentElement.classList.add('theme-pink');
+        }
+      }
+      
+      // Initialize both themes
+      initializeTheme();
+      initializeColorTheme();
+      
+      // Listen for OS theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+          if (e.matches) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        }
+      });
+    </script>
+  </head>
+  <body class="bg-gradient-to-br from-pink-100 to-blue-100 dark:from-gray-900 dark:to-indigo-950 dark:text-white min-h-screen transition-colors duration-300">
+    <div class="shooting-star"></div>
+    <MemeFollower />
+    <MemeToast />
+    <Navbar />
+    <PromoBanner />
+    <ThemeToggle />
+    <ThemeCustomizer />
+    
+    <main class="container mx-auto px-2 py-4 max-w-6xl">
+      <slot />
+    </main>
+    <footer class="container mx-auto p-2 text-center text-gray-600 dark:text-gray-400 mt-6 mb-4 text-sm">
+      <p class="font-comic">Made with <span class="heartbeat inline-block">💖</span> and lots of memes | &copy; {new Date().getFullYear()} <span class="rainbow-text">{siteConfig.title}</span></p>
+    </footer>
+  </body>
+</html>
